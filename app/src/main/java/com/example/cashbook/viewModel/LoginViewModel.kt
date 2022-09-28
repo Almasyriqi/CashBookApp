@@ -27,10 +27,10 @@ class LoginViewModel(private val repository: CashBookRepository, application: Ap
     private val viewModelJob = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
-    private val _navigatetoUserDetails = MutableLiveData<Boolean>()
+    private val _navigatetoHome = MutableLiveData<Boolean>()
 
-    val navigatetoUserDetails: LiveData<Boolean>
-        get() = _navigatetoUserDetails
+    val navigatetoHome: LiveData<Boolean>
+        get() = _navigatetoHome
 
     private val _errorToast = MutableLiveData<Boolean>()
 
@@ -57,7 +57,7 @@ class LoginViewModel(private val repository: CashBookRepository, application: Ap
                     if(usersNames.password == inputPassword.value){
                         inputUsername.value = null
                         inputPassword.value = null
-                        _navigatetoUserDetails.value = true
+                        _navigatetoHome.value = true
                     }else{
                         _errorToastInvalidPassword.value = true
                     }
@@ -70,8 +70,8 @@ class LoginViewModel(private val repository: CashBookRepository, application: Ap
 
 
 
-    fun doneNavigatingUserDetails() {
-        _navigatetoUserDetails.value = false
+    fun doneNavigatingHome() {
+        _navigatetoHome.value = false
     }
 
 

@@ -2,4 +2,10 @@
     <string name="app_name">CashBook</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="change_password">
+        <u>Ganti Password</u>.
+    </string>
+    <string name="about_me">
+        Aplikasi ini dibuat oleh:\nNama: M. Syifaul Ikrom A\nNIM: 1941720057\nTanggal: 28 September 2022
+    </string>
 </resources>

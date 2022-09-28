@@ -22,13 +22,25 @@ abstract class CashBookDatabase : RoomDatabase() {
                         context.applicationContext,
                         CashBookDatabase::class.java,
                         "cash_book_database"
-                    ).createFromAsset("CashBook.db")
+                    )
                         .fallbackToDestructiveMigration()
                         .allowMainThreadQueries()
                         .build()
 
+                    if(instance.userDatabaseDao.getCount() == 0){
+                        instance = Room.databaseBuilder(
+                            context.applicationContext,
+                            CashBookDatabase::class.java,
+                            "cash_book_database"
+                        ).createFromAsset("CashBook.db")
+                            .fallbackToDestructiveMigration()
+                            .allowMainThreadQueries()
+                            .build()
+                    }
+
                     INSTANCE = instance
                 }
+
                 return instance
             }
         }

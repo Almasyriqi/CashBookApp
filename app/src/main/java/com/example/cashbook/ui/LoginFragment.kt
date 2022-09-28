@@ -67,11 +67,11 @@ class LoginFragment : Fragment() {
             }
         })
 
-        loginViewModel.navigatetoUserDetails.observe(viewLifecycleOwner, Observer { hasFinished->
+        loginViewModel.navigatetoHome.observe(viewLifecycleOwner, Observer { hasFinished->
             if (hasFinished == true){
                 Log.i("MYTAG","insidi observe")
-                navigateUserDetails()
-                loginViewModel.doneNavigatingUserDetails()
+                navigateHome()
+                loginViewModel.doneNavigatingHome()
             }
         })
 
@@ -79,7 +79,7 @@ class LoginFragment : Fragment() {
         return binding.root
     }
 
-    private fun navigateUserDetails() {
+    private fun navigateHome() {
         Log.i("MYTAG","insidisplayUsersList")
         val action = LoginFragmentDirections.actionLoginFragmentToHomeFragment()
         NavHostFragment.findNavController(this).navigate(action)

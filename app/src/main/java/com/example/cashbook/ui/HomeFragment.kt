@@ -17,8 +17,14 @@ import com.example.cashbook.database.CashFlowEntity
 import com.example.cashbook.databinding.FragmentHomeBinding
 import com.example.cashbook.viewModel.HomeViewModel
 import com.example.cashbook.viewModel.HomeViewModelFactory
+import com.github.mikephil.charting.components.XAxis
+import com.github.mikephil.charting.data.Entry
+import com.github.mikephil.charting.data.LineData
+import com.github.mikephil.charting.data.LineDataSet
+import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
 import java.text.NumberFormat
 import java.util.*
+import kotlin.collections.ArrayList
 
 class HomeFragment : Fragment() {
     private lateinit var homeViewModel: HomeViewModel
@@ -86,6 +92,50 @@ class HomeFragment : Fragment() {
 
         binding.textPemasukan.setText("Pemasukan: "+rupiah(repository.getSumCash("pemasukan")))
         binding.textPengeluaran.setText("Pengeluaran "+rupiah(repository.getSumCash("pengeluaran")))
+
+        val tanggal = repository.getDate()
+        var nominal_pemasukan = ArrayList<Double>()
+        var nominal_pengeluaran = ArrayList<Double>()
+
+        tanggal.forEach {
+            var pemasukan = repository.getSumNominal(it, "pemasukan")
+            if(pemasukan == null){
+                pemasukan = 0.0
+            }
+            nominal_pemasukan.add(pemasukan)
+
+            var pengeluaran = repository.getSumNominal(it, "pengeluaran")
+            if(pengeluaran == null){
+                pengeluaran = 0.0
+            }
+            nominal_pengeluaran.add(pengeluaran)
+        }
+
+        val lineEntry = ArrayList<Entry>()
+        nominal_pemasukan.forEachIndexed{index, element->
+            lineEntry.add(Entry(element.toFloat(), index))
+        }
+
+        val lineEntry1 = ArrayList<Entry>()
+        nominal_pengeluaran.forEachIndexed { index, d ->
+            lineEntry1.add(Entry(d.toFloat(), index))
+        }
+
+        val linePemasukan = LineDataSet(lineEntry, "Pemasukan")
+        linePemasukan.color = resources.getColor(R.color.green)
+
+        val linePengeluaran = LineDataSet(lineEntry1, "Pengeluaran")
+        linePengeluaran.color = resources.getColor(R.color.red)
+
+        val finaldataset = ArrayList<LineDataSet>()
+        finaldataset.add(linePemasukan)
+        finaldataset.add(linePengeluaran)
+
+        val data = LineData(tanggal, finaldataset as List<ILineDataSet>?)
+
+        binding.lineChart.xAxis.position = XAxis.XAxisPosition.BOTTOM
+        binding.lineChart.data = data
+        binding.lineChart.animateXY(100, 500)
 
         return binding.root
     }

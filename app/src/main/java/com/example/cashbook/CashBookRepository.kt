@@ -33,4 +33,12 @@ class CashBookRepository(private val dao: UserDao, private val cashDao: CashFlow
     fun getSumCash(status:String): Double {
         return cashDao.getSumCash(status).toDouble()
     }
+
+    fun getDate(): List<String> {
+        return cashDao.getDate()
+    }
+
+    fun getSumNominal(date:String, status:String): Double {
+        return cashDao.getSumNominal(date, status)
+    }
 }

@@ -92,7 +92,7 @@
             android:layout_marginTop="5dp"
             android:layout_marginEnd="20dp"
             android:ems="10"
-            android:hint="Masukkan Password Baru"
+            android:hint="Masukkan Nominal"
             android:importantForAutofill="no"
             android:inputType="number"
             android:text="@={addCashViewModel.inputNominal}"

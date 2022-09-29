@@ -13,9 +13,12 @@ import androidx.navigation.fragment.NavHostFragment
 import com.example.cashbook.CashBookRepository
 import com.example.cashbook.R
 import com.example.cashbook.database.CashBookDatabase
+import com.example.cashbook.database.CashFlowEntity
 import com.example.cashbook.databinding.FragmentHomeBinding
 import com.example.cashbook.viewModel.HomeViewModel
 import com.example.cashbook.viewModel.HomeViewModelFactory
+import java.text.NumberFormat
+import java.util.*
 
 class HomeFragment : Fragment() {
     private lateinit var homeViewModel: HomeViewModel
@@ -57,6 +60,14 @@ class HomeFragment : Fragment() {
             }
         })
 
+        homeViewModel.navigatetoDetail.observe(viewLifecycleOwner, {hasFinished->
+            if (hasFinished == true){
+                Log.i("MYTAG","insidi observe")
+                navigateDetail()
+                homeViewModel.doneNavigatingDetail()
+            }
+        })
+
         homeViewModel.navigatetoPemasukan.observe(viewLifecycleOwner, {hasFinished->
             if(hasFinished == true){
                 Log.i("MYTAG","insidi observe")
@@ -72,6 +83,10 @@ class HomeFragment : Fragment() {
                 homeViewModel.doneNavigatingAddCashFlow()
             }
         })
+
+        binding.textPemasukan.setText("Pemasukan: "+rupiah(repository.getSumCash("pemasukan")))
+        binding.textPengeluaran.setText("Pengeluaran "+rupiah(repository.getSumCash("pengeluaran")))
+
         return binding.root
     }
 
@@ -81,9 +96,21 @@ class HomeFragment : Fragment() {
         NavHostFragment.findNavController(this).navigate(action)
     }
 
+    private fun navigateDetail() {
+        Log.i("MYTAG","toDetail")
+        val action = HomeFragmentDirections.actionHomeFragmentToDetailsCashFragment()
+        NavHostFragment.findNavController(this).navigate(action)
+    }
+
     private fun navigateAddCashFlow(status: Int){
         Log.i("MYTAG","toAddCashFlow")
         val action = HomeFragmentDirections.actionHomeFragmentToAddCashFlowFragment(status)
         NavHostFragment.findNavController(this).navigate(action)
+    }
+
+    fun rupiah(number: Double): String{
+        val localeID =  Locale("in", "ID")
+        val numberFormat = NumberFormat.getCurrencyInstance(localeID)
+        return numberFormat.format(number).toString()
     }
 }

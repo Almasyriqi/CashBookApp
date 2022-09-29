@@ -8,13 +8,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.cashbook.CashBookRepository
 
-class UserDetailsViewModel (private val repository: CashBookRepository,application: Application):AndroidViewModel(application){
-
-    val users = repository.users
-    init {
-        Log.i("MYTAG","inside_users_Lisrt_init")
-    }
-
+class DetailCashViewModel(private val repository: CashBookRepository, application: Application) :
+AndroidViewModel(application){
+    val cashFlowList = repository.cashFlow
 
     private val _navigateto = MutableLiveData<Boolean>()
 
@@ -28,5 +24,4 @@ class UserDetailsViewModel (private val repository: CashBookRepository,applicati
     fun backButtonclicked(){
         _navigateto.value = true
     }
-
 }

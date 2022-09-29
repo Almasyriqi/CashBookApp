@@ -2,27 +2,18 @@
 <layout  xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.example.cashbook.ui.UserDetailsFragment" >
+    tools:context="com.example.cashbook.ui.DetailCashFragment" >
 
     <data>
         <variable
-            name="userDelailsLayout"
-            type="com.example.cashbook.viewModel.UserDetailsViewModel" />
+            name="detailCashLayout"
+            type="com.example.cashbook.viewModel.DetailCashViewModel" />
     </data>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-
-        <Button
-            android:id="@+id/backButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:onClick="@{()->userDelailsLayout.backButtonclicked()}"
-            android:text="Kembali" />
 
         <LinearLayout
             android:id="@+id/linearLayout"
@@ -31,15 +22,17 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/textView_users"
+                android:id="@+id/textView_detail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:paddingTop="5sp"
-                android:text="List User"
+                android:layout_marginBottom="20dp"
+                android:text="Detail Cash Flow"
                 android:textAlignment="center"
-                android:textSize="18sp"
+                android:textSize="20sp"
                 android:textStyle="bold"
+                android:textColor="@color/black"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.498"
                 app:layout_constraintStart_toStartOf="parent"
@@ -50,7 +43,7 @@
                 tools:layout_editor_absoluteY="16dp" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/usersRecyclerView"
+                android:id="@+id/detailsRecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -62,6 +55,17 @@
             </androidx.recyclerview.widget.RecyclerView>
 
         </LinearLayout>
+
+        <Button
+            android:id="@+id/backButton"
+            android:backgroundTint="@color/button_red"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:onClick="@{()->detailCashLayout.backButtonclicked()}"
+            android:text="Kembali"
+            android:textColor="@color/black"/>
 
     </LinearLayout>
 

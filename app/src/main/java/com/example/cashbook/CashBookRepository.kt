@@ -29,4 +29,8 @@ class CashBookRepository(private val dao: UserDao, private val cashDao: CashFlow
     fun insert(cash: CashFlowEntity) {
         executorService.execute { cashDao.insert(cash) }
     }
+
+    fun getSumCash(status:String): Double {
+        return cashDao.getSumCash(status).toDouble()
+    }
 }

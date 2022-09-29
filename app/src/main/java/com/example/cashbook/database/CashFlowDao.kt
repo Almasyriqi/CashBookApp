@@ -10,4 +10,7 @@ interface CashFlowDao {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insert(cash_flow: CashFlowEntity)
+
+    @Query("select sum(nominal) from cash_flow where status = :status")
+    fun getSumCash(status: String): Double
 }

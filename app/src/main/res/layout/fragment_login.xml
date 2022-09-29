@@ -105,11 +105,11 @@
 
         <Button
             android:id="@+id/submitButton"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="76dp"
             android:layout_marginTop="30dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginEnd="76dp"
             android:onClick="@{()->myLoginViewModel.loginButton()}"
             android:text="LOGIN"
             app:layout_constraintBottom_toBottomOf="parent"

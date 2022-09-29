@@ -38,6 +38,14 @@
         <action
             android:id="@+id/action_homeFragment_to_settingFragment"
             app:destination="@id/settingFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_addCashFlowFragment"
+            app:destination="@id/addCashFlowFragment">
+            <argument
+                android:name="status"
+                app:argType="integer"
+                android:defaultValue="1" />
+        </action>
     </fragment>
 
     <fragment
@@ -51,5 +59,19 @@
         <action
             android:id="@+id/action_settingFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/addCashFlowFragment"
+        android:name="com.example.cashbook.ui.AddCashFlowFragment"
+        android:label="add_cash_flow_fragment"
+        tools:layout="@layout/fragment_add_cash_flow" >
+        <argument
+            android:name="status"
+            app:argType="integer"
+            android:defaultValue="0" />
+        <action
+            android:id="@+id/action_addCashFlowFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
     </fragment>
 </navigation>

@@ -36,7 +36,9 @@ class UserDetailsFragment : Fragment() {
 
         val dao = CashBookDatabase.getInstance(application).userDatabaseDao
 
-        val repository = CashBookRepository(dao)
+        val daoCash = CashBookDatabase.getInstance(application).cashFlowDatabaseDao
+
+        val repository = CashBookRepository(dao, daoCash)
 
         val factory = UserDetalisFactory(repository, application)
 

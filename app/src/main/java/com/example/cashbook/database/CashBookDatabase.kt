@@ -5,9 +5,10 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
-@Database(entities = [UserEntity::class], version = 1, exportSchema = true)
+@Database(entities = [UserEntity::class, CashFlowEntity::class], version = 1, exportSchema = true)
 abstract class CashBookDatabase : RoomDatabase() {
     abstract val userDatabaseDao: UserDao
+    abstract val cashFlowDatabaseDao : CashFlowDao
 
     companion object {
         @Volatile

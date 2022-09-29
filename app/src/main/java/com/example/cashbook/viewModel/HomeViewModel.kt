@@ -17,8 +17,29 @@ AndroidViewModel(application), Observable{
     val navigatetoSetting: LiveData<Boolean>
         get() = _navigatetoSetting
 
+    private val _navigatetoPemasukan = MutableLiveData<Boolean>()
+    val navigatetoPemasukan: LiveData<Boolean>
+        get() = _navigatetoPemasukan
+
+    private val _navigatetoPengeluaran = MutableLiveData<Boolean>()
+    val navigatetoPengeluaran: LiveData<Boolean>
+        get() = _navigatetoPengeluaran
+
     fun settingButton() {
         _navigatetoSetting.value = true
+    }
+
+    fun pemasukanButton() {
+        _navigatetoPemasukan.value = true
+    }
+
+    fun pengeluaranButton() {
+        _navigatetoPengeluaran.value = true
+    }
+
+    fun doneNavigatingAddCashFlow() {
+        _navigatetoPemasukan.value = false
+        _navigatetoPengeluaran.value = false
     }
 
     fun doneNavigatingSetting() {

@@ -37,7 +37,9 @@ class HomeFragment : Fragment() {
 
         val dao = CashBookDatabase.getInstance(application).userDatabaseDao
 
-        val repository = CashBookRepository(dao)
+        val daoCash = CashBookDatabase.getInstance(application).cashFlowDatabaseDao
+
+        val repository = CashBookRepository(dao, daoCash)
 
         val factory = HomeViewModelFactory(repository, application)
 
@@ -47,13 +49,27 @@ class HomeFragment : Fragment() {
 
         binding.lifecycleOwner = this
 
-
-
         homeViewModel.navigatetoSetting.observe(viewLifecycleOwner, {hasFinished->
             if (hasFinished == true){
                 Log.i("MYTAG","insidi observe")
                 navigateSetting()
                 homeViewModel.doneNavigatingSetting()
+            }
+        })
+
+        homeViewModel.navigatetoPemasukan.observe(viewLifecycleOwner, {hasFinished->
+            if(hasFinished == true){
+                Log.i("MYTAG","insidi observe")
+                navigateAddCashFlow(1)
+                homeViewModel.doneNavigatingAddCashFlow()
+            }
+        })
+
+        homeViewModel.navigatetoPengeluaran.observe(viewLifecycleOwner, {hasFinished->
+            if(hasFinished == true){
+                Log.i("MYTAG","insidi observe")
+                navigateAddCashFlow(0)
+                homeViewModel.doneNavigatingAddCashFlow()
             }
         })
         return binding.root
@@ -62,6 +78,12 @@ class HomeFragment : Fragment() {
     private fun navigateSetting() {
         Log.i("MYTAG","toSetting")
         val action = HomeFragmentDirections.actionHomeFragmentToSettingFragment()
+        NavHostFragment.findNavController(this).navigate(action)
+    }
+
+    private fun navigateAddCashFlow(status: Int){
+        Log.i("MYTAG","toAddCashFlow")
+        val action = HomeFragmentDirections.actionHomeFragmentToAddCashFlowFragment(status)
         NavHostFragment.findNavController(this).navigate(action)
     }
 }
